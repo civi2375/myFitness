@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Button,Stack,Typography } from '@mui/material'
-import { exercisesOptions, fetchData } from '../utils/fetchData'
+import { exercisesOptions } from '../utils/fetchData'
 
 const ExerciseCard = ({exercise}) => {
-    const [imgURL, setimgURL] = useState(null)
-    useEffect(()=>{
-        const fetchImgData = async () => {
-            const response = await fetchData(`https://exercisedb.p.rapidapi.com/image?exerciseId=${exercise.id}&resolution=360&rapidapi-key=${process.env.REACT_APP_RAPID_API_KEY}`,exercisesOptions)
-            console.log('====================================');
-            console.log(response);
-            console.log('====================================');
-            setimgURL(response.data)
-        }
-        fetchImgData()
-    },[exercise])
+    const [imgURL, setImgURL] = useState(null)
+    useEffect(() => {
+        fetch(`https://exercisedb.p.rapidapi.com/image?exerciseId=${exercise.id}&resolution=720&rapidapi-key=${process.env.REACT_APP_RAPID_API_KEY}`, exercisesOptions) 
+            .then(response => response.blob())
+            .then(blob => {
+                const url = URL.createObjectURL(blob);
+                setImgURL(url);
+            })
+            .catch(error => console.error('Fetch error:', error));
+    }, [exercise.id]);
+    
     return (
     <Link className='exercise-card' to={`/exercise/${exercise.id}`}>
         

@@ -1,13 +1,13 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Typography,Stack,Button } from '@mui/material'
 import BodyPartImage from '../assets/icons/body-part.png'
 import TargetImage from '../assets/icons/target.png'
 import EquipmentImage from '../assets/icons/equipment.png'
+import { exercisesOptions } from '../utils/fetchData'
 
 const Detail = ({ exerciseDetail,id }) => {
-    const resolution = "360"
-    const imgURL = `https://exercisedb.p.rapidapi.com/image?exerciseId=${id}&resolution=${resolution}&rapidapi-key=${process.env.REACT_APP_RAPID_API_KEY}`
-    const {bodyPart,name,target,eqipment} = exerciseDetail
+    const {bodyPart,name,target,equipment} = exerciseDetail
+    const [imgURL, setImgURL] = useState(null)
     const extraDetail = [
         {
             icon:BodyPartImage,
@@ -19,10 +19,18 @@ const Detail = ({ exerciseDetail,id }) => {
         },
         {
             icon:EquipmentImage,
-            name:eqipment
+            name:equipment
         }
     ]
-
+    useEffect(() => {
+        fetch(`https://exercisedb.p.rapidapi.com/image?exerciseId=${id}&resolution=720&rapidapi-key=${process.env.REACT_APP_RAPID_API_KEY}`, exercisesOptions) 
+            .then(response => response.blob())
+            .then(blob => {
+                const url = URL.createObjectURL(blob);
+                setImgURL(url);
+            })
+            .catch(error => console.error('Fetch error:', error));
+    }, [id]);
     return (
     <Stack gap='60px' sx={{flexDirection:{lg:"row"},p:"20px",alignItems:"center"}}>
         <img src={imgURL} alt={name} loading='lazy' className='detail-image' />

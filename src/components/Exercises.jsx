@@ -13,6 +13,9 @@ const Exercises = ({exercises,setExercises,bodyPart}) => {
   const currentExercises = exercises.slice(indexOfFirstExercise,indexOfLastExercise)
   
   const paginate =(e,value) =>{
+    console.log('====================================');
+    console.log(123);
+    console.log('====================================');
     setCurrentPage(value)
     window.scrollTo({top:1800,behavior:"smooth"})
   } 
@@ -23,16 +26,10 @@ const Exercises = ({exercises,setExercises,bodyPart}) => {
         exercisesData= await fetchData(
         'https://exercisedb.p.rapidapi.com/exercises?limit=1500',exercisesOptions
         )
-        console.log('1 ',);
-        console.log(exercisesData);
-        
       } else {
         exercisesData = await fetchData(
           `https://exercisedb.p.rapidapi.com/exercises/bodyPart/${bodyPart}?limit=1500`,exercisesOptions
-        )
-        console.log('2 ',);
-        console.log(exercisesData);
-        
+        )        
       }
       setExercises(exercisesData)
     }

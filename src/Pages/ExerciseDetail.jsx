@@ -20,10 +20,11 @@ const ExerciseDetail = () => {
       
       const exerciseDetailData = await fetchData(`${exerciseDbUrl}/exercises/exercise/${id}`,exercisesOptions)
       setexerciseDetail(exerciseDetailData)
+      console.log(exerciseDetailData);
       
-      const exerciseVideoData = await fetchData(`${youtubeSearchUrl}/search?query=${exerciseDetail.name}`,youtubeOptions)
+      const exerciseVideoData = await fetchData(`${youtubeSearchUrl}/search?query=${exerciseDetailData.name}&hl=en&type=v&sort=v`,youtubeOptions)
       setexerciseVideo(exerciseVideoData.contents)
-
+      
       const targetData = await fetchData(`${exerciseDbUrl}/exercises/target/${exerciseDetailData.target}`,exercisesOptions)
       setTarget(targetData)
       
