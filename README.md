@@ -1,6 +1,10 @@
-# 健身動作網頁
+# 健身動作網頁  
 
 這是一個使用 React 18 和 RapidAPI 打造的現代健身鍛鍊網頁，允許用戶選擇鍛鍊類別和肌肉群，查看詳細資訊並從 YouTube 獲取相關影片。
+
+**網址
+
+https://civilianfitness.netlify.app/
 
 ## 專案概述
 
