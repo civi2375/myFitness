@@ -32,8 +32,8 @@
 1. 克隆本專案：
 
    ```bash
-   git clone https://github.com/<你的用戶名>/gym-exercises.git
-   cd gym-exercises
+   git clone https://github.com/civi2375/myFitness.git
+   cd myFitness
    ```
 
 2. 安裝依賴：
