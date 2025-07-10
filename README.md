@@ -1,70 +1,102 @@
-# Getting Started with Create React App
+# 健身鍛鍊應用程式
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+這是一個使用 React 18 和 RapidAPI 打造的現代健身鍛鍊應用程式，允許用戶選擇鍛鍊類別和肌肉群，瀏覽超過 1000 種鍛鍊項目，查看詳細資訊並從 YouTube 獲取相關影片。
 
-## Available Scripts
+## 專案概述
 
-In the project directory, you can run:
+本專案展示如何使用 React 結合 RapidAPI 的鍛鍊資料庫和 YouTube 搜尋 API，構建一個功能豐富的健身應用程式。用戶可以透過直觀的介面篩選鍛鍊、查看詳細說明，並觀看相關的 YouTube 示範影片。
 
-### `npm start`
+## 主要功能
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **美觀的用戶介面**：使用 Material-UI 打造響應式設計。
+- **資料獲取**：從 RapidAPI 的鍛鍊資料庫和 YouTube API 獲取資料。
+- **鍛鍊篩選**：支援按身體部位或器械篩選鍛鍊項目。
+- **影片整合**：在鍛鍊詳情頁顯示相關的 YouTube 示範影片。
+- **分頁功能**：實現鍛鍊列表分頁，提升用戶體驗。
+- **響應式佈局**：使用 Flexbox 和 Stack 確保跨設備的良好顯示效果。
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 技術棧
 
-### `npm test`
+- **前端**：React 18, Material-UI
+- **API**：RapidAPI (ExerciseDB, YouTube Search)
+- **狀態管理**：React Hooks (`useState`, `useEffect`)
+- **部署**：Netlify 或 Vercel
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 安裝與使用
 
-### `npm run build`
+### 先決條件
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- 安裝 Node.js（建議版本 16 或以上）
+- 註冊 RapidAPI 帳戶並獲取 API 密鑰
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 安裝步驟
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. 克隆本專案：
 
-### `npm run eject`
+   ```bash
+   git clone https://github.com/<你的用戶名>/gym-exercises.git
+   cd gym-exercises
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+2. 安裝依賴：
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+   ```bash
+   npm install
+   ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+3. 設置 API 密鑰：
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+   - 在 `src/utils/fetchData.js` 中配置 RapidAPI 的密鑰。
 
-## Learn More
+4. 啟動開發伺服器：
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+   ```bash
+   npm start
+   ```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### API 整合
 
-### Code Splitting
+- 使用 RapidAPI 的 ExerciseDB API 獲取鍛鍊資料。
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- 使用 YouTube Search API 獲取相關影片。
 
-### Analyzing the Bundle Size
+- 示例請求：
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+  ```javascript
+  fetch('https://exercisedb.p.rapidapi.com/exercises?limit=1500', {
+    headers: { 'X-RapidAPI-Key': '<你的API密鑰>' }
+  });
+  ```
 
-### Making a Progressive Web App
+### 專案結構
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- `src/components/Navbar.js`：應用導航欄
+- `src/components/Home.js`：首頁，包含搜尋框和鍛鍊列表
+- `src/components/ExerciseDetail.js`：鍛鍊詳情頁，顯示影片和相關鍛鍊
+- `src/components/Footer.js`：頁腳，包含版權資訊
+- `src/utils/fetchData.js`：處理 API 請求的工具函數
 
-### Advanced Configuration
+## 部署
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+1. 構建生產版本：
 
-### Deployment
+   ```bash
+   npm run build
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+2. 部署到雲平台（如 Netlify 或 Vercel）：
 
-### `npm run build` fails to minify
+   - 將 `build` 資料夾上傳至平台，或連結 GitHub 倉庫進行自動部署。
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 貢獻
+
+歡迎提交 Issue 或 Pull Request！請確保遵循 Contributor Covenant 行為準則。
+
+## 授權
+
+本專案採用 MIT 授權，詳情見 LICENSE 檔案。
+
+## 致謝
+
+- RapidAPI 提供的 API 支援
+- Material-UI 提供的 UI 組件庫
